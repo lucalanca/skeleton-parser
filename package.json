@@ -1,17 +1,17 @@
 {
   "name": "skeleton-parser",
-  "version": "1.0.0",
   "description": "parses a skeleton project structure",
   "main": "index.js",
   "bin": "cli.js",
   "scripts": {
     "lint": "xo",
     "unit": "ava",
-    "test": "npm run lint && npm run unit"
+    "test": "npm run lint && npm run unit",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lucalanca/skeleton-parser.git"
+    "url": "https://github.com/lucalanca/skeleton-parser.git"
   },
   "keywords": [
     "cli-app",
@@ -29,7 +29,8 @@
   "devDependencies": {
     "ava": "^0.15.2",
     "lodash.defaults": "^4.0.1",
-    "xo": "^0.16.0"
+    "xo": "^0.16.0",
+    "semantic-release": "^4.3.5"
   },
   "xo": {
     "esnext": true,
