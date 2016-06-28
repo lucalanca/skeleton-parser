@@ -3,7 +3,6 @@
   "description": "parses a skeleton project structure",
   "main": "index.js",
   "bin": "cli.js",
-  "version": "1.0.0",
   "scripts": {
     "lint": "xo",
     "unit": "ava",
@@ -24,12 +23,12 @@
   "license": "Apache-2.0",
   "dependencies": {
     "globby": "^5.0.0",
+    "lodash.defaults": "^4.0.1",
     "lodash.groupby": "^4.4.0",
     "meow": "^3.7.0"
   },
   "devDependencies": {
     "ava": "^0.15.2",
-    "lodash.defaults": "^4.0.1",
     "xo": "^0.16.0",
     "semantic-release": "^4.3.5"
   },
