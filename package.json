@@ -1,0 +1,25 @@
+{
+  "name": "skeleton-parser",
+  "version": "1.0.0",
+  "description": "parses a skeleton project structure",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucalanca/skeleton-parser.git"
+  },
+  "keywords": [
+    "cli-app",
+    "cli",
+    "skeleton",
+    "parser"
+  ],
+  "author": "lucalanca",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/lucalanca/skeleton-parser/issues"
+  },
+  "homepage": "https://github.com/lucalanca/skeleton-parser#readme"
+}
