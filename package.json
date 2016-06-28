@@ -3,7 +3,6 @@
   "description": "parses a skeleton project structure",
   "main": "index.js",
   "bin": "cli.js",
-  "version": "1.0.0",
   "scripts": {
     "lint": "xo",
     "unit": "ava",
