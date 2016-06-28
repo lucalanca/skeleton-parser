@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "parses a skeleton project structure",
   "main": "index.js",
+  "bin": "cli.js",
   "scripts": {
-    "test": "mocha"
+    "lint": "xo",
+    "unit": "ava",
+    "test": "npm run lint && npm run unit"
   },
   "repository": {
     "type": "git",
@@ -18,8 +21,23 @@
   ],
   "author": "lucalanca",
   "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/lucalanca/skeleton-parser/issues"
+  "dependencies": {
+    "globby": "^5.0.0",
+    "lodash.groupby": "^4.4.0",
+    "meow": "^3.7.0"
   },
-  "homepage": "https://github.com/lucalanca/skeleton-parser#readme"
+  "devDependencies": {
+    "ava": "^0.15.2",
+    "lodash.defaults": "^4.0.1",
+    "xo": "^0.16.0"
+  },
+  "xo": {
+    "esnext": true,
+    "envs": [
+      "node"
+    ]
+  },
+  "git-pre-hooks": {
+    "pre-commit": "npm test"
+  }
 }
