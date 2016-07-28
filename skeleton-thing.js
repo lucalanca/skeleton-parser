@@ -2,7 +2,6 @@
 
 const path = require('path');
 const yaml = require('js-yaml');
-const values = require('lodash.values');
 
 const negate = require('lodash.negate');
 const pickBy = require('lodash.pickby');
@@ -89,7 +88,6 @@ class SkeletonThing {
 		return getFileTypeContents(DEFAULT_EXTENSIONS_BY_TYPE.STYLE, root)
 			.then(contents => {
 				if (contents) {
-
 					return true;
 				}
 			})
