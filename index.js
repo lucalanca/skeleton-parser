@@ -1,42 +1,25 @@
 'use strict';
 
 const globby = require('globby');
-const groupBy = require('lodash.groupby');
+
 const defaults = require('lodash.defaults');
+const SkeletonThing = require('./skeleton-thing');
 
-function groupSkeletonThingsByType(things) {
-	return groupBy(things, 'type');
-}
-
-class SkeletonThing {
-	constructor(path, innerPaths) {
-		this.path = path;
-		this.innerPaths = innerPaths;
-		this.name = SkeletonThing.getNameByPath(path);
-		this.type = SkeletonThing.getTypeByPath(path);
-	}
-
-	static getNameByPath(path) {
-		return path.slice(path.indexOf('/') + 1);
-	}
-
-	static getTypeByPath(path) {
-		return path.slice(0, path.indexOf('/'));
-	}
-}
-const DEFAULT_EXTENSIONS = ['jade', 'scss', 'js', 'yml', 'md'];
-SkeletonThing.THING_PATTERN = DEFAULT_EXTENSIONS.map(ext => `*.${ext}`);
-
-function processThing(path, globbyOptions) {
-	return globby(SkeletonThing.THING_PATTERN, globbyOptions)
-		.then(
-			innerPaths => new SkeletonThing(path, innerPaths),
-			() => new SkeletonThing(path, [])
+function processSkeletonThingsArray(skeletonThings) {
+	return skeletonThings.reduce((acc, cur) => {
+		const transformedCurrent = {
+			[cur.id]: cur.toJson()
+		};
+		return Object.assign(
+			{},
+			acc,
+			transformedCurrent
 		);
+	}, {});
 }
 
 const DEFAULT_OPTIONS = {
-	folders: ['elements', 'modules', 'pages']
+	folders: ['elements', 'modules']
 };
 
 module.exports = function (root, options) {
@@ -45,13 +28,12 @@ module.exports = function (root, options) {
 	const globbyOptions = {cwd: `${root}/src`};
 	return globby(globbyPattern, globbyOptions)
 		.then(paths => {
+			console.log('paths', paths);
 			return paths.map(p => {
-				const thingGlobbyOptions = {cwd: `${globbyOptions.cwd}/${p}`};
-				return processThing(p, thingGlobbyOptions);
+				return SkeletonThing.create(p, `${globbyOptions.cwd}/${p}`);
 			});
 		})
-		.then(allThingsPromises => Promise.all(allThingsPromises))
-		.then(groupSkeletonThingsByType)
+		.then(allSkeletonThingPromise => Promise.all(allSkeletonThingPromise))
+		.then(processSkeletonThingsArray)
 		;
 };
-

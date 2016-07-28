@@ -8,6 +8,7 @@
     "lint": "xo",
     "unit": "ava",
     "test": "npm run lint && npm run unit",
+    "test:tdd": "ava --watch",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
@@ -23,15 +24,26 @@
   "author": "lucalanca",
   "license": "Apache-2.0",
   "dependencies": {
+    "fs-promise": "^0.5.0",
     "globby": "^5.0.0",
+    "js-yaml": "^3.6.1",
     "lodash.defaults": "^4.0.1",
-    "lodash.groupby": "^4.4.0",
-    "meow": "^3.7.0"
+    "lodash.isundefined": "^3.0.1",
+    "lodash.negate": "^3.0.1",
+    "lodash.pickby": "^4.4.0",
+    "lodash.values": "^4.1.0",
+    "meow": "^3.7.0",
+    "postcss": "^5.1.0",
+    "postcss-scss": "^0.1.8",
+    "pug-lexer": "^2.0.2",
+    "pug-parser": "^2.0.1"
   },
   "devDependencies": {
     "ava": "^0.15.2",
-    "xo": "^0.16.0",
-    "semantic-release": "^4.3.5"
+    "chalk": "^1.1.3",
+    "difflet": "^1.0.1",
+    "semantic-release": "^4.3.5",
+    "xo": "^0.16.0"
   },
   "xo": {
     "esnext": true,
