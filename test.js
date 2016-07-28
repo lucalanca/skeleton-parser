@@ -51,7 +51,6 @@ test.cb(t => {
 		// }
 	};
 	m('./fixtures/simple').then(actual => {
-		console.log(JSON.stringify(actual, undefined, 2));
 		t.deepEqual(actual, expected, diff.compare(actual, expected));
 		t.end();
 	});

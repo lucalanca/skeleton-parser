@@ -28,7 +28,6 @@ module.exports = function (root, options) {
 	const globbyOptions = {cwd: `${root}/src`};
 	return globby(globbyPattern, globbyOptions)
 		.then(paths => {
-			console.log('paths', paths);
 			return paths.map(p => {
 				return SkeletonThing.create(p, `${globbyOptions.cwd}/${p}`);
 			});

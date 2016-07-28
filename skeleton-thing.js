@@ -50,8 +50,6 @@ class SkeletonThing {
 		this.styleData = data[2];
 		this.scriptData = data[3];
 		this.docData = data[4];
-
-		// console.log('scriptData', this.scriptData);
 	}
 
 	static create(name, root) {
