@@ -4,20 +4,20 @@ import m from './';
 
 const diff = difflet({indent: 2});
 const expected = {
-	'elements': {
-		'colors': {
+	elements: {
+		colors: {
 			path: 'src/elements/colors/',
 			style: 'styles.scss',
 			documentation: 'doc.spec.jade'
 		},
-		'grid': {
+		grid: {
 			path: 'src/elements/grid/',
 			style: 'styles.scss',
 			documentation: 'doc.spec.jade'
 		}
 	},
-	'modules': {
-		'bar': {
+	modules: {
+		bar: {
 			path: 'src/modules/bar/',
 			template: 'template.jade',
 			script: 'script.js',
@@ -34,7 +34,7 @@ const expected = {
 			style: 'styles.scss',
 			documentation: 'doc.spec.jade'
 		},
-		'foo': {
+		foo: {
 			path: 'src/modules/foo/',
 			template: 'template.jade',
 			script: 'script.js',
@@ -62,7 +62,6 @@ test('Tests the normal use case', async t => {
 	const actual = await m('./fixtures/simple');
 	t.deepEqual(actual, expected, diff.compare(actual, expected));
 });
-
 
 test('Tests the folder passing use case', async t => {
 	const actual = await m('./fixtures/simple', {folders: ['src/elements']});
