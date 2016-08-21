@@ -4,46 +4,55 @@ import m from './';
 
 const diff = difflet({indent: 2});
 const expected = {
-	'elements/colors': {
-		style: true,
-		documentation: true
-	},
-	'elements/grid': {
-		style: true,
-		documentation: true
-	},
-	'modules/bar': {
-		template: true,
-		script: true,
-		definition: {
-			data: {
-				arg1: 'ads',
-				arg2: 'asd'
-			},
-			options: {
-				opt1: ['op1-defaul', 'op1-other'],
-				opt2: ['op2-defaul', 'op2-other']
-			}
+	'elements': {
+		'colors': {
+			path: 'src/elements/colors/',
+			style: 'styles.scss',
+			documentation: 'doc.spec.jade'
 		},
-		documentation: true,
-		style: true
+		'grid': {
+			path: 'src/elements/grid/',
+			style: 'styles.scss',
+			documentation: 'doc.spec.jade'
+		}
 	},
-	'modules/foo': {
-		template: true,
-		script: true,
-		definition: {
-			data: {
-				arg1: 'ads',
-				arg2: 'asd'
+	'modules': {
+		'bar': {
+			path: 'src/modules/bar/',
+			template: 'template.jade',
+			script: 'script.js',
+			definition: {
+				data: {
+					arg1: 'ads',
+					arg2: 'asd'
+				},
+				options: {
+					opt1: ['op1-defaul', 'op1-other'],
+					opt2: ['op2-defaul', 'op2-other']
+				}
 			},
-			options: {
-				opt1: ['op1-defaul', 'op1-other'],
-				opt2: ['op2-defaul', 'op2-other']
-			}
+			style: 'styles.scss',
+			documentation: 'doc.spec.jade'
 		},
-		documentation: true,
-		style: true
+		'foo': {
+			path: 'src/modules/foo/',
+			template: 'template.jade',
+			script: 'script.js',
+			definition: {
+				data: {
+					arg1: 'ads',
+					arg2: 'asd'
+				},
+				options: {
+					opt1: ['op1-defaul', 'op1-other'],
+					opt2: ['op2-defaul', 'op2-other']
+				}
+			},
+			style: 'styles.scss',
+			documentation: 'doc.spec.jade'
+		}
 	}
+
 	// ,
 	// 'pages/index.jade': {
 	// }
