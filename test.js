@@ -56,7 +56,7 @@ test('Tests the normal use case', async t => {
 
 
 test('Tests the folder passing use case', async t => {
-	const actual = await m('./fixtures/simple', {folders: ['elements']});
+	const actual = await m('./fixtures/simple', {folders: ['src/elements']});
 	const elementsExpected = {
 		'elements/colors': expected['elements/colors'],
 		'elements/grid': expected['elements/grid']
