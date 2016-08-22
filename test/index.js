@@ -1,6 +1,6 @@
 import test from 'ava';
 import difflet from 'difflet';
-import m from './';
+import m from '../';
 
 const diff = difflet({indent: 2});
 const expected = {
@@ -63,7 +63,7 @@ test('Tests the normal use case', async t => {
 	t.deepEqual(actual, expected, diff.compare(actual, expected));
 });
 
-test.only('Tests the folder passing use case', async t => {
+test('Tests the folder passing use case', async t => {
 	const actual = await m('./fixtures/simple', {folders: ['src/elements']});
 	const elementsExpected = {
 		elements: expected.elements
