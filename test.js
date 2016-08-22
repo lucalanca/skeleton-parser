@@ -63,11 +63,10 @@ test('Tests the normal use case', async t => {
 	t.deepEqual(actual, expected, diff.compare(actual, expected));
 });
 
-test('Tests the folder passing use case', async t => {
+test.only('Tests the folder passing use case', async t => {
 	const actual = await m('./fixtures/simple', {folders: ['src/elements']});
 	const elementsExpected = {
-		'elements/colors': expected['elements/colors'],
-		'elements/grid': expected['elements/grid']
+		elements: expected.elements
 	};
 
 	t.deepEqual(actual, elementsExpected, diff.compare(actual, elementsExpected));
