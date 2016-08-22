@@ -3,10 +3,10 @@
 const globby = require('globby');
 
 const defaults = require('lodash.defaults');
-const SkeletonThing = require('./skeleton-thing');
+const moduleParser = require('./module-parser');
 
-function processSkeletonThingsArray(skeletonThings) {
-	return skeletonThings.reduce((acc, cur) => {
+function processmodulesArray(modules) {
+	return modules.reduce((acc, cur) => {
 		const transformedCurrent = {
 			[cur.id]: cur.toJson()
 		};
@@ -29,10 +29,10 @@ module.exports = function (root, options) {
 	return globby(globbyPattern, globbyOptions)
 		.then(paths => {
 			return paths.map(p => {
-				return SkeletonThing.create(p, `${globbyOptions.cwd}/${p}`);
+				return moduleParser.create(p, `${globbyOptions.cwd}/${p}`);
 			});
 		})
-		.then(allSkeletonThingPromise => Promise.all(allSkeletonThingPromise))
-		.then(processSkeletonThingsArray)
+		.then(allModulesPromise => Promise.all(allModulesPromise))
+		.then(processmodulesArray)
 		;
 };

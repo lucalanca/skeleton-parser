@@ -38,10 +38,10 @@ function getFileTypeContents(filetypes, root) {
 		});
 }
 
-class SkeletonThing {
+class moduleParser {
 	constructor(path, data) {
-		this.name = SkeletonThing.getNameByPath(path);
-		this.type = SkeletonThing.getTypeByPath(path);
+		this.name = moduleParser.getNameByPath(path);
+		this.type = moduleParser.getTypeByPath(path);
 		this.id = `${this.type}/${this.name}`;
 
 		this.data = data;
@@ -55,14 +55,14 @@ class SkeletonThing {
 	static create(name, root) {
 		return Promise
 			.all([
-				SkeletonThing.parseTemplate(root),
-				SkeletonThing.parseDefinition(root),
-				SkeletonThing.parseStyle(root),
-				SkeletonThing.parseScript(root),
-				SkeletonThing.parseDoc(root)
+				moduleParser.parseTemplate(root),
+				moduleParser.parseDefinition(root),
+				moduleParser.parseStyle(root),
+				moduleParser.parseScript(root),
+				moduleParser.parseDoc(root)
 			])
 			.then(parsedData => {
-				return new SkeletonThing(name, parsedData);
+				return new moduleParser(name, parsedData);
 			}, err => console.log('error parsing', name, err));
 	}
 
@@ -167,4 +167,4 @@ class SkeletonThing {
 	}
 }
 
-module.exports = SkeletonThing;
+module.exports = moduleParser;
