@@ -1,9 +1,8 @@
-import test from 'ava';
-import mh from '../module-helper';
-import yaml from 'js-yaml';
 import path from 'path';
+import test from 'ava';
+import yaml from 'js-yaml';
 import fsp from 'fs-promise';
-
+import mh from '../module-helper';
 
 test.beforeEach(t => {
 	t.context.projectRoot = 'fixtures/simple/src/';
@@ -82,7 +81,6 @@ test('Test that we find no definition in a module', async t => {
  * extractGroup
  */
 test('Test that the group is extracted right', t => {
-
 	let exampleModule = 'modules/foo';
 	t.deepEqual(mh.extractGroup(exampleModule), 'modules', 'Expected foo as module name');
 

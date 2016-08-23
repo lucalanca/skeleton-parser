@@ -3,15 +3,15 @@
 const moduleHelper = require('./module-helper');
 
 function trimObject(json) {
-	for (var i in json) {
-	  if (json[i] === null || json[i] === undefined) {
-	    delete json[i];
-	  }
+	for (const i in json) {
+		if (json[i] === null || json[i] === undefined) {
+			delete json[i];
+		}
 	}
 	return json;
 }
 
-module.exports = function(modulePath, cwd) {
+module.exports = (modulePath, cwd) => {
 	const name = moduleHelper.extractName(modulePath);
 	const group = moduleHelper.extractGroup(modulePath);
 
@@ -21,21 +21,21 @@ module.exports = function(modulePath, cwd) {
 		documentation: moduleHelper.parseDocumentation,
 		script: moduleHelper.parseScript,
 		style: moduleHelper.parseStyle
-	}
+	};
 
-	const attibutesPromises = Object.keys(moduleJSON).map( key => {
-		return moduleJSON[key](modulePath, cwd).then( value => {
+	const attibutesPromises = Object.keys(moduleJSON).map(key => {
+		return moduleJSON[key](modulePath, cwd).then(value => {
 			moduleJSON[key] = value;
 		});
-	})
+	});
 
-	return Promise.all(attibutesPromises).then( () => {
+	return Promise.all(attibutesPromises).then(() => {
 		moduleJSON.path = moduleHelper.buildPath(modulePath, cwd);
 
-		return  {
+		return {
 			[group]: {
 				[name]: trimObject(moduleJSON)
 			}
 		};
 	});
-}
+};

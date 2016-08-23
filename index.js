@@ -11,10 +11,9 @@ const DEFAULT_OPTIONS = {
 };
 
 module.exports = function (opts) {
-
-  opts = opts || {};
-  opts.cwd = opts.cwd || DEFAULT_OPTIONS.cwd;
-  opts.folders = opts.folders || DEFAULT_OPTIONS.folders;
+	opts = opts || {};
+	opts.cwd = opts.cwd || DEFAULT_OPTIONS.cwd;
+	opts.folders = opts.folders || DEFAULT_OPTIONS.folders;
 
 	const globbyPattern = opts.folders.map(folder => `${folder}/*`);
 	const globbyOptions = {cwd: `${opts.cwd}`};
@@ -27,8 +26,7 @@ module.exports = function (opts) {
 		})
 	.then(allModulesPromise => Promise.all(allModulesPromise))
 	.then(processmodulesArray);
-}
-
+};
 
 function processmodulesArray(modules) {
 	return modules.reduce((acc, cur) => {

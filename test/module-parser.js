@@ -1,12 +1,11 @@
 'use strict';
 
+import path from 'path';
 import test from 'ava';
 import yaml from 'js-yaml';
-import path from 'path';
 import fsp from 'fs-promise';
 
 const mp = require('../module-parser');
-
 
 test.beforeEach(t => {
 	t.context.projectRoot = 'fixtures/simple/src/';

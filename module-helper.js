@@ -14,39 +14,39 @@ const TYPE_ENTRY_POINTS = {
 
 function checkFiletypeExists(filename, modulePath, cwd) {
 	const searchedFile = path.join(cwd, modulePath, filename);
-	return fsp.exists(searchedFile).then(function (exists) {
-	  if (exists) {
-	  	return filename;
-	  }
+	return fsp.exists(searchedFile).then(exists => {
+		if (exists) {
+			return filename;
+		}
 	});
 }
 
 module.exports = {
-	extractGroup: function(modulePath){
+	extractGroup: modulePath => {
 		return path.dirname(modulePath);
 	},
-	extractName: function(modulePath){
+	extractName: modulePath => {
 		return path.basename(modulePath);
 	},
-	buildPath: function(modulePath, cwd){
+	buildPath: (modulePath, cwd) => {
 		return path.join(cwd, modulePath);
 	},
-	parseScript: function(modulePath, cwd){
+	parseScript: (modulePath, cwd) => {
 		return checkFiletypeExists(TYPE_ENTRY_POINTS.SCRIPT, modulePath, cwd);
 	},
-	parseStyle: function(modulePath, cwd){
+	parseStyle: (modulePath, cwd) => {
 		return checkFiletypeExists(TYPE_ENTRY_POINTS.STYLE, modulePath, cwd);
 	},
-	parseTemplate: function(modulePath, cwd){
+	parseTemplate: (modulePath, cwd) => {
 		return checkFiletypeExists(TYPE_ENTRY_POINTS.TEMPATE, modulePath, cwd);
 	},
-	parseDocumentation: function(modulePath, cwd){
+	parseDocumentation: (modulePath, cwd) => {
 		return checkFiletypeExists(TYPE_ENTRY_POINTS.DOC, modulePath, cwd);
 	},
-	parseDefinition: function(modulePath, cwd){
+	parseDefinition: (modulePath, cwd) => {
 		return checkFiletypeExists(TYPE_ENTRY_POINTS.DEFINITION, modulePath, cwd).then(
 			definitionFile => {
-				if (definitionFile != undefined) {
+				if (definitionFile !== undefined) {
 					const absolutePath = path.resolve(cwd, modulePath, definitionFile);
 					return fsp.readFile(absolutePath, {encoding: 'utf8'}).then(
 						yaml.load
