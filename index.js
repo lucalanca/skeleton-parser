@@ -6,7 +6,7 @@ const _defaultsdeep = require('lodash.merge');
 const moduleParser = require('./module-parser');
 
 const DEFAULT_OPTIONS = {
-	cwd: path.join(process.cwd(), 'src'),
+	cwd: 'src',
 	folders: ['elements', 'modules']
 };
 
