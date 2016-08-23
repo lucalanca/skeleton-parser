@@ -6,12 +6,12 @@ import expected from './expected/simple'
 const diff = difflet({indent: 2});
 
 test('Tests the normal use case', async t => {
-	const actual = await m('./fixtures/simple');
+	const actual = await m({cwd: './fixtures/simple/src'});
 	t.deepEqual(actual, expected, diff.compare(actual, expected));
 });
 
 test('Tests the folder passing use case', async t => {
-	const actual = await m('./fixtures/simple', {folders: ['src/elements']});
+	const actual = await m({cwd: './fixtures/simple/src', folders: ['elements']});
 	const elementsExpected = {
 		elements: expected.elements
 	};

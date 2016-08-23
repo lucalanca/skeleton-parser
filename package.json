@@ -29,6 +29,7 @@
     "js-yaml": "^3.6.1",
     "lodash.defaults": "^4.0.1",
     "lodash.isundefined": "^3.0.1",
+    "lodash.merge": "^4.6.0",
     "lodash.negate": "^3.0.1",
     "lodash.pickby": "^4.4.0",
     "lodash.values": "^4.1.0",
