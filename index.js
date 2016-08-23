@@ -29,10 +29,12 @@ module.exports = function (opts) {
 };
 
 function processmodulesArray(modules) {
-	return modules.reduce((acc, cur) => {
-		return _defaultsdeep(
-			acc,
-			cur
-		);
-	});
+	if (modules.length > 0) {
+		return modules.reduce((acc, cur) => {
+			return _defaultsdeep(
+				acc,
+				cur
+			);
+		});
+	}
 }
