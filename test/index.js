@@ -1,7 +1,7 @@
 import test from 'ava';
 import difflet from 'difflet';
 import m from '../';
-import expected from './expected/simple';
+import expected from './expected/_simple';
 
 const diff = difflet({indent: 2});
 
