@@ -1,19 +1,18 @@
 module.exports = {
 	elements: {
 		colors: {
-			path: 'src/elements/colors/',
 			style: 'styles.scss',
-			documentation: 'doc.spec.jade'
+			documentation: 'doc.spec.jade',
+			path: 'fixtures/simple/src/elements/colors/'
 		},
 		grid: {
-			path: 'src/elements/grid/',
 			style: 'styles.scss',
-			documentation: 'doc.spec.jade'
+			documentation: 'doc.spec.jade',
+			path: 'fixtures/simple/src/elements/grid/'
 		}
 	},
 	modules: {
 		bar: {
-			path: 'src/modules/bar/',
 			template: 'template.jade',
 			script: 'script.js',
 			definition: {
@@ -27,10 +26,10 @@ module.exports = {
 				}
 			},
 			style: 'styles.scss',
-			documentation: 'doc.spec.jade'
+			documentation: 'doc.spec.jade',
+			path: 'fixtures/simple/src/modules/bar/'
 		},
 		foo: {
-			path: 'src/modules/foo/',
 			template: 'template.jade',
 			script: 'script.js',
 			definition: {
@@ -44,11 +43,8 @@ module.exports = {
 				}
 			},
 			style: 'styles.scss',
-			documentation: 'doc.spec.jade'
+			documentation: 'doc.spec.jade',
+			path: 'fixtures/simple/src/modules/foo/'
 		}
 	}
-
-	// ,
-	// 'pages/index.jade': {
-	// }
 };
