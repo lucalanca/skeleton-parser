@@ -10,15 +10,14 @@ const cli = meow({
 		'',
 		'Example',
 		'  skeleton-parser .',
-		'',
-		'Options',
-		'  --verbose      Detailed summary.',
-		'  --key          Google API Key. By default the free tier is used.'
+		''
+		// 'Options',
+		// '  --verbose      Detailed summary.',
 	]
 });
 
 if (!cli.input[0]) {
-	console.error('Please supply an URL');
+	console.error('Please supply a folder path');
 	process.exit(1);
 }
 
@@ -30,4 +29,3 @@ skeletonParser(cli.input[0], cli.flags)
 		console.error(err);
 		process.exit(1);
 	});
-
