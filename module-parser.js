@@ -1,15 +1,7 @@
 'use strict';
 
+const pickBy = require('lodash.pickby');
 const moduleHelper = require('./module-helper');
-
-function trimObject(json) {
-	for (const i in json) {
-		if (json[i] === null || json[i] === undefined) {
-			delete json[i];
-		}
-	}
-	return json;
-}
 
 const FILE_TYPES = [
 	'template', 'definition', 'documentation',
@@ -43,18 +35,20 @@ module.exports = (modulePath, cwd) => {
 				);
 			}, {});
 		})
+		// remove falsey values from obj
+		.then(moduleObj => pickBy(moduleObj, Boolean))
 		// add path
-		.then(moduleJson => {
+		.then(moduleObj => {
 			return Object.assign(
 				{},
-				moduleJson,
+				moduleObj,
 				{path: moduleHelper.buildPath(modulePath, cwd)}
 			);
 		})
-		.then(moduleJson => {
+		.then(moduleObj => {
 			return {
 				[group]: {
-					[name]: trimObject(moduleJson)
+					[name]: moduleObj
 				}
 			};
 		});
