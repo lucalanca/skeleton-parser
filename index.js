@@ -1,7 +1,7 @@
 'use strict';
 
 const globby = require('globby');
-const _defaultsdeep = require('lodash.merge');
+const merge = require('lodash.merge');
 const moduleParser = require('./module-parser');
 
 const DEFAULT_OPTIONS = {
@@ -24,16 +24,9 @@ module.exports = function (opts) {
 			});
 		})
 	.then(allModulesPromise => Promise.all(allModulesPromise))
-	.then(processmodulesArray);
+	.then(mergeArrayOfObjects);
 };
 
-function processmodulesArray(modules) {
-	if (modules.length > 0) {
-		return modules.reduce((acc, cur) => {
-			return _defaultsdeep(
-				acc,
-				cur
-			);
-		});
-	}
+function mergeArrayOfObjects(modules) {
+	return modules.reduce((acc, cur) => merge(acc, cur));
 }
