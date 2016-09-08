@@ -109,19 +109,19 @@ Clone the project and use the following tasks.
 
 This project uses semantic-release for auto-releasing new versions on npm. As such, it is required to follow [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-angular/blob/master/convention.md)'s commit messages format. Following this format guarantees that new versions are automatically updated using the master branch.
 
-### Patch Commit
+#### Patch Commit
 
 ```
 fix(pencil): stop graphite breaking when too much pressure applied
 ```
 
-### Minor Feature Commit
+#### Minor Feature Commit
 
 ```
 feat(pencil): add 'graphiteWidth' option
 ```
 
-### Major Breaking Commit
+#### Major Breaking Commit
 
 ```
 perf(pencil): remove graphiteWidth option
