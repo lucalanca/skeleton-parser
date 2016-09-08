@@ -21,7 +21,13 @@ if (!cli.input[0]) {
 	process.exit(1);
 }
 
-skeletonParser(cli.input[0], cli.flags)
+const options = Object.assign(
+	{},
+	{cwd: cli.input[0]},
+	cli.flags
+);
+
+skeletonParser(options)
 	.then(result => {
 		console.log(JSON.stringify(result, undefined, 2));
 	})

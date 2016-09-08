@@ -15,7 +15,7 @@ module.exports = function (opts) {
 	opts.folders = opts.folders || DEFAULT_OPTIONS.folders;
 
 	const globbyPattern = opts.folders.map(folder => `${folder}/*`);
-	const globbyOptions = {cwd: `${opts.cwd}`};
+	const globbyOptions = {cwd: `${opts.cwd}/src`};
 
 	return globby(globbyPattern, globbyOptions).then(
 		paths => {
