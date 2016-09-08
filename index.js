@@ -1,6 +1,5 @@
 'use strict';
 
-const path = require('path');
 const globby = require('globby');
 const _defaultsdeep = require('lodash.merge');
 const moduleParser = require('./module-parser');
