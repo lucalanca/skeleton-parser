@@ -21,6 +21,14 @@ function checkFiletypeExists(filename, modulePath, cwd) {
 	});
 }
 
+function readFile(cwd, modulePath, file) {
+	if (file) {
+		const absolutePath = path.resolve(cwd, modulePath, file);
+		return fsp.readFile(absolutePath, {encoding: 'utf8'});
+	}
+	return;
+}
+
 module.exports = {
 	extractGroup: modulePath => {
 		return path.dirname(modulePath);
@@ -44,15 +52,9 @@ module.exports = {
 		return checkFiletypeExists(TYPE_ENTRY_POINTS.DOC, modulePath, cwd);
 	},
 	parseDefinition: (modulePath, cwd) => {
-		return checkFiletypeExists(TYPE_ENTRY_POINTS.DEFINITION, modulePath, cwd).then(
-			definitionFile => {
-				if (definitionFile !== undefined) {
-					const absolutePath = path.resolve(cwd, modulePath, definitionFile);
-					return fsp.readFile(absolutePath, {encoding: 'utf8'}).then(
-						yaml.load
-					);
-				}
-			}
-		);
+		return checkFiletypeExists(TYPE_ENTRY_POINTS.DEFINITION, modulePath, cwd)
+			.then(definitionFile => readFile(cwd, modulePath, definitionFile))
+			.then(content => content ? yaml.load(content) : undefined)
+			;
 	}
 };
