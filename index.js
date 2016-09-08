@@ -1,38 +1,39 @@
 'use strict';
 
 const globby = require('globby');
-
-const defaults = require('lodash.defaults');
-const SkeletonThing = require('./skeleton-thing');
-
-function processSkeletonThingsArray(skeletonThings) {
-	return skeletonThings.reduce((acc, cur) => {
-		const transformedCurrent = {
-			[cur.id]: cur.toJson()
-		};
-		return Object.assign(
-			{},
-			acc,
-			transformedCurrent
-		);
-	}, {});
-}
+const _defaultsdeep = require('lodash.merge');
+const moduleParser = require('./module-parser');
 
 const DEFAULT_OPTIONS = {
+	cwd: 'src',
 	folders: ['elements', 'modules']
 };
 
-module.exports = function (root, options) {
-	options = defaults({}, options, DEFAULT_OPTIONS);
-	const globbyPattern = options.folders.map(f => `${f}/*`);
-	const globbyOptions = {cwd: `${root}/src`};
-	return globby(globbyPattern, globbyOptions)
-		.then(paths => {
+module.exports = function (opts) {
+	opts = opts || {};
+	opts.cwd = opts.cwd || DEFAULT_OPTIONS.cwd;
+	opts.folders = opts.folders || DEFAULT_OPTIONS.folders;
+
+	const globbyPattern = opts.folders.map(folder => `${folder}/*`);
+	const globbyOptions = {cwd: `${opts.cwd}`};
+
+	return globby(globbyPattern, globbyOptions).then(
+		paths => {
 			return paths.map(p => {
-				return SkeletonThing.create(p, `${globbyOptions.cwd}/${p}`);
+				return moduleParser(p, `${globbyOptions.cwd}`);
 			});
 		})
-		.then(allSkeletonThingPromise => Promise.all(allSkeletonThingPromise))
-		.then(processSkeletonThingsArray)
-		;
+	.then(allModulesPromise => Promise.all(allModulesPromise))
+	.then(processmodulesArray);
 };
+
+function processmodulesArray(modules) {
+	if (modules.length > 0) {
+		return modules.reduce((acc, cur) => {
+			return _defaultsdeep(
+				acc,
+				cur
+			);
+		});
+	}
+}
