@@ -1,19 +1,48 @@
 module.exports = {
-	elements: {
-		colors: {
-			documentation: 'docs.spec.jade',
-			style: 'style.scss',
-			path: 'fixtures/simple/src/elements/colors'
+	materials: {
+		audios: {
+			assets: ['welcome.mp3']
 		},
-		grid: {
-			documentation: 'docs.spec.jade',
+		colors: {
+			documentation: 'docs.spec.pug',
+			style: 'style.scss'
+		},
+		fonts: {
+			documentation: 'docs.spec.pug',
 			style: 'style.scss',
-			path: 'fixtures/simple/src/elements/grid'
+			fonts: ['serif.ttf']
+		},
+		icons: {
+			assets: ['bar.svg', 'foo.svg']
+		},
+		images: {
+			assets: ['background.png']
+		},
+		spaces: {
+			documentation: 'docs.spec.pug',
+			style: 'style.scss'
+		},
+		videos: {
+			assets: ['hero.mp4']
+		}
+	},
+	elements: {
+		grid: {
+			documentation: 'docs.spec.pug',
+			style: 'style.scss'
 		}
 	},
 	modules: {
 		bar: {
-			template: 'template.jade',
+			template: {
+				path: 'template.pug',
+				mixin: 'bar',
+				contents: `
+mixin bar(data, options)
+	h1 Hello #{data.arg1}
+
+`
+			},
 			definition: {
 				data: {
 					arg1: 'ads',
@@ -24,13 +53,20 @@ module.exports = {
 					opt2: ['op2-defaul', 'op2-other']
 				}
 			},
-			documentation: 'docs.spec.jade',
+			documentation: 'docs.spec.pug',
 			script: 'script.js',
-			style: 'style.scss',
-			path: 'fixtures/simple/src/modules/bar'
+			style: 'style.scss'
 		},
 		foo: {
-			template: 'template.jade',
+			template: {
+				path: 'template.pug',
+				mixin: 'foo',
+				contents: `
+mixin foo(data, options)
+	h1 World #{data.arg2}
+
+`
+			},
 			definition: {
 				data: {
 					arg1: 'ads',
@@ -41,10 +77,9 @@ module.exports = {
 					opt2: ['op2-defaul', 'op2-other']
 				}
 			},
-			documentation: 'docs.spec.jade',
+			documentation: 'docs.spec.pug',
 			script: 'script.js',
-			style: 'style.scss',
-			path: 'fixtures/simple/src/modules/foo'
+			style: 'style.scss'
 		}
 	}
 };
