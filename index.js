@@ -1,32 +1,32 @@
-'use strict';
+"use strict";
 
-const globby = require('globby');
-const merge = require('lodash.merge');
-const moduleParser = require('./module-parser');
+const globby = require("globby");
+const merge = require("lodash.merge");
+const moduleParser = require("./module-parser");
+const path = require("path");
 
 const DEFAULT_OPTIONS = {
-	cwd: 'src',
-	folders: ['elements', 'modules']
+	cwd: "src",
+	folders: ["elements", "components"],
+	yml: true //Default option to parse .yml files
 };
 
-module.exports = function (opts) {
-	opts = opts || {};
-	opts.cwd = opts.cwd || DEFAULT_OPTIONS.cwd;
-	opts.folders = opts.folders || DEFAULT_OPTIONS.folders;
+module.exports = function(options = {}) {
+	const opts = { ...DEFAULT_OPTIONS, ...options };
 
 	const globbyPattern = opts.folders.map(folder => `${folder}/*`);
-	const globbyOptions = {cwd: `${opts.cwd}/src`};
+	const globbyOptions = { cwd: path.resolve(`${opts.cwd}`) };
 
-	return globby(globbyPattern, globbyOptions).then(
-		paths => {
+	return globby(globbyPattern, globbyOptions)
+		.then(paths => {
 			return paths.map(p => {
-				return moduleParser(p, `${globbyOptions.cwd}`);
+				return moduleParser(p, `${globbyOptions.cwd}`, opts.yml);
 			});
 		})
-	.then(allModulesPromise => Promise.all(allModulesPromise))
-	.then(mergeArrayOfObjects);
+		.then(allModulesPromise => Promise.all(allModulesPromise))
+		.then(mergeArrayOfObjects);
 };
 
 function mergeArrayOfObjects(modules) {
-	return modules.reduce((acc, cur) => merge(acc, cur));
+	return modules.reduce((acc, cur) => merge(acc, cur), {});
 }
