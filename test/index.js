@@ -16,6 +16,6 @@ test('Tests the folder passing use case', async t => {
 	const elementsExpected = {
 		elements: expected.elements
 	};
-t.deepEqual(actual, elementsExpected, diff.compare(actual, elementsExpected));
+	t.deepEqual(actual, elementsExpected, diff.compare(actual, elementsExpected));
 });
 

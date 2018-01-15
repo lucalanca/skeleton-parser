@@ -12,7 +12,6 @@ const DEFAULT_OPTIONS = {
 
 module.exports = function (options = {}) {
 	const opts = {...DEFAULT_OPTIONS, ...options};
-
 	const globbyPattern = opts.folders.map(folder => `${folder}/*`);
 	const globbyOptions = {cwd: `${opts.cwd}/src`};
 

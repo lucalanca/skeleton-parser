@@ -7,7 +7,6 @@ import fsp from 'fs-promise';
 
 const mp = require('../module-parser');
 
-
 test.beforeEach(t => {
 	t.context.projectRoot = 'fixtures/simple/src/';
 });
@@ -17,14 +16,14 @@ test.beforeEach(t => {
  */
 test('Test that we find the right module structure for a full module', async t => {
 	const exampleModule = 'modules/foo';
-	const yml=true;
+	const yml = true;
 	const moduleJSON = await mp(exampleModule, t.context.projectRoot, yml);
 	t.deepEqual(moduleJSON.modules.foo.path, 'fixtures/simple/src/modules/foo');
 	t.deepEqual(moduleJSON.modules.foo.template, 'template.jade');
 	t.deepEqual(moduleJSON.modules.foo.documentation, 'docs.spec.jade');
 	t.deepEqual(moduleJSON.modules.foo.script, 'script.js');
 	t.deepEqual(moduleJSON.modules.foo.style, 'style.scss');
-	
+
 	const expectedDefinitionFile = await fsp.readFile(path.resolve(t.context.projectRoot, exampleModule, 'definition.yml'), {encoding: 'utf8'});
 	const expectedDefinition = yaml.load(expectedDefinitionFile);
 
@@ -33,7 +32,7 @@ test('Test that we find the right module structure for a full module', async t =
 
 test('Test that we find the right module structure for a partial module ', async t => {
 	const exampleModule = 'elements/colors';
-	const yml=true;
+	const yml = true;
 	const moduleJSON = await mp(exampleModule, t.context.projectRoot, yml);
 
 	t.deepEqual(moduleJSON.elements.colors.path, 'fixtures/simple/src/elements/colors');
@@ -46,14 +45,14 @@ test('Test that we find the right module structure for a partial module ', async
 
 test('Test that we find the right module structure for a full module using .js parser', async t => {
 	const exampleModule = 'modules/foo';
-	const yml=false;
+	const yml = false;
 	const moduleJSON = await mp(exampleModule, t.context.projectRoot, yml);
 	t.deepEqual(moduleJSON.modules.foo.path, 'fixtures/simple/src/modules/foo');
 	t.deepEqual(moduleJSON.modules.foo.template, 'template.jade');
 	t.deepEqual(moduleJSON.modules.foo.documentation, 'docs.spec.jade');
 	t.deepEqual(moduleJSON.modules.foo.script, 'script.js');
 	t.deepEqual(moduleJSON.modules.foo.style, 'style.scss');
-	
+
 	const expectedDefinitionFile = path.resolve(t.context.projectRoot, exampleModule, 'definition.js');
 	const expectedDefinition = require(expectedDefinitionFile);
 
