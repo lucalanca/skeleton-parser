@@ -5,15 +5,16 @@ const merge = require('lodash.merge');
 const moduleParser = require('./module-parser');
 
 const DEFAULT_OPTIONS = {
-	cwd: 'src',
+	cwd: '.',
 	folders: ['elements', 'modules'],
-	yml: true // Default option to parse .yml files
+	yml: true, // Default option to parse .yml files
+	src: 'src'
 };
 
 module.exports = function (options = {}) {
 	const opts = {...DEFAULT_OPTIONS, ...options};
 	const globbyPattern = opts.folders.map(folder => `${folder}/*`);
-	const globbyOptions = {cwd: `${opts.cwd}/src`};
+	const globbyOptions = {cwd: `${opts.cwd}/${opts.src}`};
 
 	return globby(globbyPattern, globbyOptions)
 		.then(paths => {
