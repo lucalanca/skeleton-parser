@@ -23,6 +23,7 @@ test('Test that we find the right module structure for a full module', async t =
 	t.deepEqual(moduleJSON.modules.foo.documentation, 'docs.spec.jade');
 	t.deepEqual(moduleJSON.modules.foo.script, 'script.js');
 	t.deepEqual(moduleJSON.modules.foo.style, 'style.scss');
+	
 
 	const expectedDefinitionFile = await fsp.readFile(path.resolve(t.context.projectRoot, exampleModule, 'definition.yml'), {encoding: 'utf8'});
 	const expectedDefinition = yaml.load(expectedDefinitionFile);

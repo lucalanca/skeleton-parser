@@ -1,14 +1,14 @@
-"use strict";
+'use strict';
 
-const pickBy = require("lodash.pickby");
-const moduleHelper = require("./module-helper");
+const pickBy = require('lodash.pickby');
+const moduleHelper = require('./module-helper');
 
 const FILE_TYPES = [
-	"template",
-	"definition",
-	"documentation",
-	"script",
-	"style"
+	'template',
+	'definition',
+	'documentation',
+	'script',
+	'style'
 ];
 const PARSER_BY_FILE_TYPE = {
 	template: moduleHelper.parseTemplate,
@@ -35,7 +35,7 @@ module.exports = (modulePath, cwd, yml) => {
 			// convert them to an object
 			.then(attributesResult => {
 				return FILE_TYPES.reduce((acc, curr, currIdx) => {
-					return Object.assign({}, acc, { [curr]: attributesResult[currIdx] });
+					return Object.assign({}, acc, {[curr]: attributesResult[currIdx]});
 				}, {});
 			})
 			// remove falsey values from obj

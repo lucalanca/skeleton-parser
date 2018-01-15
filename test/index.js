@@ -6,7 +6,9 @@ import expected from './expected/_simple';
 const diff = difflet({indent: 2});
 
 test('Tests the normal use case', async t => {
-	const actual = await m({cwd: './fixtures/simple'});
+	const actual = await m({cwd: './fixtures/simple/src'});
+	// console.log("actual", actual);
+	// console.log("expected",expected);
 	t.deepEqual(actual, expected, diff.compare(actual, expected));
 });
 

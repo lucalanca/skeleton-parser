@@ -1,21 +1,20 @@
-"use strict";
-
-const globby = require("globby");
-const merge = require("lodash.merge");
-const moduleParser = require("./module-parser");
-const path = require("path");
+'use strict';
+const path = require('path');
+const globby = require('globby');
+const merge = require('lodash.merge');
+const moduleParser = require('./module-parser');
 
 const DEFAULT_OPTIONS = {
-	cwd: "src",
-	folders: ["elements", "components"],
-	yml: true //Default option to parse .yml files
+	cwd: 'src',
+	folders: ['elements', 'components'],
+	yml: true // Default option to parse .yml files
 };
 
-module.exports = function(options = {}) {
-	const opts = { ...DEFAULT_OPTIONS, ...options };
+module.exports = function (options = {}) {
+	const opts = {...DEFAULT_OPTIONS, ...options};
 
 	const globbyPattern = opts.folders.map(folder => `${folder}/*`);
-	const globbyOptions = { cwd: path.resolve(`${opts.cwd}`) };
+	const globbyOptions = {cwd: path.resolve(`${opts.cwd}`)};
 
 	return globby(globbyPattern, globbyOptions)
 		.then(paths => {
