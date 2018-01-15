@@ -55,15 +55,15 @@ module.exports = {
 	parseDefinition: (modulePath, cwd) => {
 		return checkFiletypeExists(TYPE_ENTRY_POINTS.DEFINITION, modulePath, cwd)
 			.then(definitionFile => readFile(cwd, modulePath, definitionFile))
-			.then(content => (content ? yaml.load(content) : undefined))
-			.catch(err => console.log(modulePath, err));
+			.then(content => content ? yaml.load(content) : undefined).catch(err => console.log(modulePath, err))
+			;
 	},
 	parseDefinitionJs: (modulePath, cwd) => {
 		return checkFiletypeExists(TYPE_ENTRY_POINTS.DEFINITION_JS, modulePath, cwd)
 			.then(definitionJsFile => {
 				return definitionJsFile ?
-				require(path.resolve(cwd, modulePath, definitionJsFile)) :
-				undefined;
+					require(path.resolve(cwd, modulePath, definitionJsFile)) :
+					undefined;
 			})
 			.catch(err => console.log(modulePath, err));
 	}
