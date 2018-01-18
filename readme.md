@@ -89,9 +89,10 @@ const skeletonParser = require('skeleton-parser');
 
 const metaData = skeletonParser({
 	cwd: SKELETON_PROJECT_FOLDER,
-	folders: [ 'elements', 'modules' ],
-  yml: false, // Default true,
+  folders: [ 'elements', 'modules' ],
+  yml: false, // Default true
   src: './' // Default './src'
+}
 )
 ```
 Note: if yml is set as false Skeleton parser will run for definition.js files, if set as true then it will run for definition.yml files.
