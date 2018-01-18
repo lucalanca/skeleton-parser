@@ -84,14 +84,20 @@ Note: currently it isn't possible to pass folders with the command line. Skeleto
 
 ### Node
 
-```
+```js
 const skeletonParser = require('skeleton-parser');
 
 const metaData = skeletonParser({
-	cwd: <SKELETON_PROJECT_FOLDER>,
-	folders: [ 'elements', 'modules' ]
+	cwd: SKELETON_PROJECT_FOLDER,
+  folders: [ 'elements', 'modules' ],
+  yml: false, // Default true
+  src: './' // Default './src'
+}
 )
 ```
+Note: if yml is set as false Skeleton parser will run for definition.js files, if set as true then it will run for definition.yml files.
+If your project does not contain a ./src folder then you should use src: '.' otherwise just use the default value.
+
 
 ## Developing
 
@@ -103,7 +109,7 @@ Clone the project and use the following tasks.
 - `npm run unit` : runs unit tests suite using [ava](https://github.com/avajs/ava)
 - `npm run test:tdd` : runs unit tests in watch mode (useful for developing)
 - `npm test` : lint and runs unit tests.
-
+- `npm run build` : generates the dist transpiled files.
 
 ### Commit messages
 

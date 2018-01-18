@@ -9,7 +9,8 @@ const TYPE_ENTRY_POINTS = {
 	STYLE: 'style.scss',
 	SCRIPT: 'script.js',
 	DOC: 'docs.spec.jade',
-	DEFINITION: 'definition.yml'
+	DEFINITION: 'definition.yml',
+	DEFINITION_JS: 'definition.js'
 };
 
 function checkFiletypeExists(filename, modulePath, cwd) {
@@ -54,7 +55,16 @@ module.exports = {
 	parseDefinition: (modulePath, cwd) => {
 		return checkFiletypeExists(TYPE_ENTRY_POINTS.DEFINITION, modulePath, cwd)
 			.then(definitionFile => readFile(cwd, modulePath, definitionFile))
-			.then(content => content ? yaml.load(content) : undefined)
+			.then(content => content ? yaml.load(content) : undefined).catch(err => console.log(modulePath, err))
 			;
+	},
+	parseDefinitionJs: (modulePath, cwd) => {
+		return checkFiletypeExists(TYPE_ENTRY_POINTS.DEFINITION_JS, modulePath, cwd)
+			.then(definitionJsFile => {
+				return definitionJsFile ?
+					require(path.resolve(cwd, modulePath, definitionJsFile)) :
+					undefined;
+			})
+			.catch(err => console.log(modulePath, err));
 	}
 };
